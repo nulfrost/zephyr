@@ -6,5 +6,6 @@ My minimalistic approach at a ZSH theme.
 
 ## Installation
 
-1. `git clone https://github.com/Danex2/zephyr.git $ZSH_CUSTOM/themes`
+1.`wget -O $ZSH_CUSTOM/themes/zephyr.zsh-theme https://raw.githubusercontent.com/danex2/zephyr/master/zephyr.zsh-theme`
+
 2. Change theme in `.zshrc` to zephyr
