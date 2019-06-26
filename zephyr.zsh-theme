@@ -5,8 +5,8 @@ local prompt="%{$fg[blue]%}❯"
 ZSH_THEME_GIT_PROMPT_PREFIX=" ~ "
 ZSH_THEME_GIT_PROMPT_ADDED=" +"
 ZSH_THEME_GIT_PROMPT_SUFFIX=""
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}!"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}"
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}∅"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}✧"
 ZSH_THEME_GIT_COMMITS_AHEAD_PREFIX="%{$fg[cyan]%} »"
 ZSH_THEME_GIT_COMMITS_BEHIND_PREFIX="%{$fg[red]%} «"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[cyan]%} ¤"
@@ -16,7 +16,7 @@ ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[magenta]%} ∇"
 
 function git_prompt_info() {
   if [ $(git symbolic-ref HEAD 2> /dev/null) ]; then
-	echo "$(parse_git_dirty)$ZSH_THEME_GIT_PROMPT_PREFIX$(current_branch)$ZSH_THEME_GIT_PROMPT_SUFFIX"
+	echo "$(parse_git_dirty)%{$reset_color%}$ZSH_THEME_GIT_PROMPT_PREFIX$(current_branch)$ZSH_THEME_GIT_PROMPT_SUFFIX"
 	
   else
 	 echo %w
