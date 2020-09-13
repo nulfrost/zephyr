@@ -2,7 +2,7 @@
 
 My minimalistic approach at a ZSH theme.
 
-![Zephyr Theme](https://i.imgur.com/94pTW4h.png)
+![Zephyr Theme](https://i.imgur.com/CYo1eWJ.png)
 
 ## Installation
 
