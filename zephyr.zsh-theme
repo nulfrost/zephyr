@@ -1,26 +1,28 @@
 local symbol="%F{blue}☌%f"
 local cwd='%F{green}%1~%f'
 local newline=$'\n'
-local date='%T'
+local time='%T'
 
+autoload -Uz vcs_info
+precmd() { vcs_info }
+zstyle ':vcs_info:git:*' formats 'on branch %F{cyan}%b'
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' stagedstr '%{%F{green}%B%}●%{%b%f%}'
+zstyle ':vcs_info:*' unstagedstr '%{%F{red}%B%}●%{%b%f%}'
 
-ZSH_THEME_GIT_PROMPT_ADDED=" +"
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}∅"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}✔"
-ZSH_THEME_GIT_COMMITS_AHEAD_PREFIX="%{$fg[cyan]%}»"
-ZSH_THEME_GIT_COMMITS_BEHIND_PREFIX="%{$fg[red]%}«"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[cyan]%}?"
-ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%}×"
-ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[yellow]%}*"
-ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[magenta]%}∇"
+setopt PROMPT_SUBST
 
-
-function git_prompt_info() {
-  if [ $(git symbolic-ref HEAD 2> /dev/null) ]; then
-	  echo "on %F{cyan}[$(current_branch)]%f $(parse_git_dirty)%f"
-  fi
++vi-git-untracked(){
+    if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]] && \
+        git status --porcelain | grep '??' &> /dev/null ; then
+        # This will show the marker if there are any untracked files in repo.
+        # If instead you want to show the marker only if there are untracked
+        # files in $PWD, use:
+        #[[ -n $(git ls-files --others --exclude-standard) ]] ; then
+        hook_com[staged]+='T'
+    fi
 }
 
-PROMPT='${cwd} $(git_prompt_info) ${newline}${symbol} '
-RPROMPT='%F{cyan}[${date}]'
+PROMPT='${cwd} ${vcs_info_msg_0_} ${newline}${symbol} '
+RPROMPT='%F{cyan}[${time}]'
 
