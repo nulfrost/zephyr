@@ -1,11 +1,11 @@
-local symbol="%F{blue}☌%f"
+local symbol="%F{blue}λ%f"
 local cwd='%F{green}%1~%f'
 local newline=$'\n'
-local time='%T'
+local time='%D'
 
 autoload -Uz vcs_info
 precmd() { vcs_info }
-zstyle ':vcs_info:git:*' formats 'on branch %F{cyan}%b'
+zstyle ':vcs_info:git:*' formats 'on branch %F{magenta}%b'
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' stagedstr '%{%F{green}%B%}●%{%b%f%}'
 zstyle ':vcs_info:*' unstagedstr '%{%F{red}%B%}●%{%b%f%}'
@@ -24,5 +24,4 @@ setopt PROMPT_SUBST
 }
 
 PROMPT='${cwd} ${vcs_info_msg_0_} ${newline}${symbol} '
-RPROMPT='%F{cyan}[${time}]'
 
